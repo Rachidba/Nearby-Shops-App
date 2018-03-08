@@ -28,6 +28,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.authenticationManager = authenticationManager;
     }
 
+    // attemptAuthentication where we parse the user's credentials
+    // and issue them to the AuthenticationManager
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
@@ -46,6 +48,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
     }
 
+    //successfulAuthentication which is the method called when a user successfully logs in.
+    // We use this method to generate a JWT for this user
     @Override
     protected void successfulAuthentication(HttpServletRequest req,
                                             HttpServletResponse res,
