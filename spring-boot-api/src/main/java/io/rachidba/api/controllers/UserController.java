@@ -42,5 +42,15 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-
+    @PostMapping("/remove-shop")
+    public ResponseEntity<String> removeShop(@RequestBody String shopId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        ApplicationUser user = applicationUserRepository.findByUsername(username);
+        if(user.getLikedShops().contains(shopId)) {
+            user.getLikedShops().remove(shopId);
+            applicationUserRepository.save(user);
+        }
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 }
