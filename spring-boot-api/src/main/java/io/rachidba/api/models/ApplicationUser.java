@@ -11,10 +11,14 @@ import java.util.List;
 public class ApplicationUser {
     @Id
     private String id;
+    //user email
     @Indexed(unique = true)
     private String username;
     private String password;
-    private List<String> likedShops;
+    // Liked shops: List that contains the IDs of liked shops
+    private List<String> likedShops = new ArrayList<>();
+    // Disliked shops
+    private List<DislikedShop> dislikedShops = new ArrayList<>();
 
     public ApplicationUser() {
         super();
@@ -33,11 +37,12 @@ public class ApplicationUser {
         this.likedShops = new ArrayList<>();
     }
 
-    public ApplicationUser(String id, String username, String password, List<String> likedShops) {
+    public ApplicationUser(String id, String username, String password, List<String> likedShops, List<DislikedShop> dislikedShops) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.likedShops = likedShops;
+        this.dislikedShops = dislikedShops;
     }
 
     public String getId() {
@@ -52,6 +57,10 @@ public class ApplicationUser {
         return password;
     }
 
+    public List<String> getLikedShops() {
+        return likedShops;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -62,6 +71,10 @@ public class ApplicationUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setLikedShops(List<String> likedShops) {
+        this.likedShops = likedShops;
     }
 }
 
