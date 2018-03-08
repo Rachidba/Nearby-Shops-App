@@ -61,6 +61,10 @@ public class ApplicationUser {
         return likedShops;
     }
 
+    public List<DislikedShop> getDislikedShops() {
+        return dislikedShops;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -75,6 +79,10 @@ public class ApplicationUser {
 
     public void setLikedShops(List<String> likedShops) {
         this.likedShops = likedShops;
+    }
+
+    public void setDislikedShops(List<DislikedShop> dislikedShops) {
+        this.dislikedShops = dislikedShops;
     }
 }
 
