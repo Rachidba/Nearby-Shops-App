@@ -11,6 +11,7 @@ import { ShopsComponent } from './shops/shops.component';
 import { RoutesRoutingModule } from './routes/routes-routing.module';
 import { MaterialModule } from './material/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { PreferredShopsComponent } from './preferred-shops/preferred-shops.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ShopsComponent
+    ShopsComponent,
+    PreferredShopsComponent
   ],
   imports: [
     BrowserModule,

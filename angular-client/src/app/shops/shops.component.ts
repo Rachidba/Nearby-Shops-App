@@ -10,6 +10,8 @@ export class ShopsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    
   }
 
 }
