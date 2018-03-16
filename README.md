@@ -10,6 +10,6 @@ This is an app that lists shops nearby.
 
 - Java/Spring :
   - Backend : Spring Boot
-  - Frontend : Angular 4 or ReactJS or VueJS
-  - Database : MySQL or MongoDBxamples
+  - Frontend : Angular 4
+  - Database : MongoDB
 
