@@ -1,3 +1,14 @@
-<p>
-  preferred-shops works!
-</p>
+<mat-grid-list cols="4" rowHeight="2:2.5">
+  <mat-grid-tile  *ngFor="let e of preferredShops">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ e.name }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{ e.picture }}" alt="Photo of the shop">
+      <mat-card-actions>
+        <button mat-button color="">DISLIKE</button>
+        <button mat-button>LIKE</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

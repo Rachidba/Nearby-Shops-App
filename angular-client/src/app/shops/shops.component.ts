@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ShopService } from '../services/shop.service';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -15,7 +14,7 @@ export class ShopsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const url = 'http://localhost:8091/api/shops';
+    const url = 'http://localhost:8091/api/shops?page=0&size=20';
     this.http.get(url, 
         {headers: new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjIiLCJleHAiOjE1MjE3Mzc4NTV9.4g31kmJuVHE-tIaSgUM2KNzxQo0I2l5Tj7lB4Vb_mChswAzgUsIHsvFvtR46ifogODO9nPLIx2drnrFm_ka8cw')})
         .subscribe(res => {

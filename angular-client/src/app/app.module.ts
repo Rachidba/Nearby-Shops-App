@@ -10,9 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { ShopsComponent } from './shops/shops.component';
 import { RoutesRoutingModule } from './routes/routes-routing.module';
 import { MaterialModule } from './material/material.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreferredShopsComponent } from './preferred-shops/preferred-shops.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,9 +28,11 @@ import { PreferredShopsComponent } from './preferred-shops/preferred-shops.compo
     BrowserModule,
     RoutesRoutingModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
