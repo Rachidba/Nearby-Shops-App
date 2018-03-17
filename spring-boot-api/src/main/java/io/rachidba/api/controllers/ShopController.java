@@ -1,17 +1,18 @@
 package io.rachidba.api.controllers;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Point;
 import io.rachidba.api.models.Shop;
 import io.rachidba.api.repositories.ApplicationUserRepository;
 import io.rachidba.api.repositories.ShopRepository;
-import org.assertj.core.util.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.data.geo.Metrics;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
@@ -22,12 +23,16 @@ public class ShopController {
     private ShopRepository shopRepository;
     @Autowired
     private ApplicationUserRepository userRepository;
-    @GetMapping("/shops")
-    public List<Shop> getAllShops(Pageable pageable) {
-        Page<Shop> shops = shopRepository.findAll(pageable);
-        return Lists.newArrayList(shops.iterator());
-    }
 
+    @GetMapping("/shops")
+    public Page<Shop> getAllShops(Pageable pageable,
+                                  @RequestParam("lat") String latitude,
+                                  @RequestParam("long") String longitude,
+                                  @RequestParam("d") double distance) {
+        return this.shopRepository.findByLocationNear(
+                new Point(Double.valueOf(longitude), Double.valueOf(latitude)),
+                new Distance(distance, Metrics.KILOMETERS), pageable);
+    }
 
     @GetMapping("/shops/liked")
     public List<Shop> getLikedShops(Pageable pageable) {
