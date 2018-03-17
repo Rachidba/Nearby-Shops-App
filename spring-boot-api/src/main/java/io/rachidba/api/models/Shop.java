@@ -1,6 +1,7 @@
 package io.rachidba.api.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="shops")
@@ -11,7 +12,7 @@ public class Shop {
     private String name;
     private String email;
     private String city;
-    private Location location;
+    private GeoJsonPoint location;
 
     public Shop() {
         super();
@@ -48,7 +49,7 @@ public class Shop {
         this.id = id;
     }
 
-    public Location getLocation() {
+    public GeoJsonPoint getLocation() {
         return location;
     }
 
@@ -68,7 +69,7 @@ public class Shop {
         this.city = city;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(GeoJsonPoint location) {
         this.location = location;
     }
 }
