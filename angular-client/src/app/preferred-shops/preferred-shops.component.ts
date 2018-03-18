@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Shop } from '../models/shop';
+import { PageEvent } from '@angular/material';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-preferred-shops',
@@ -8,23 +11,43 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class PreferredShopsComponent implements OnInit {
 
-  preferredShops: any;
-  constructor(private http: HttpClient) { }
+  preferredShops: Shop[];
+  pageEvent: PageEvent;
+  totalElements: number;
+  totalPages: number;
+  last: boolean;
+  first: boolean;
+  number: 0;
+  size: 20;
+
+  constructor(private apiService: ApiService) { 
+
+  }
 
   ngOnInit() {
-    const url = 'http://localhost:8091/api/shops/liked';
-    this.http.get(url, 
-        {headers: new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjIiLCJleHAiOjE1MjE3Mzc4NTV9.4g31kmJuVHE-tIaSgUM2KNzxQo0I2l5Tj7lB4Vb_mChswAzgUsIHsvFvtR46ifogODO9nPLIx2drnrFm_ka8cw')})
-        .subscribe(res => {
-          this.preferredShops = Object.keys(res).map(function(k) { return res[k] });
-    },
-      (err: HttpErrorResponse) => {
-        console.log(err.error);
-        console.log(err.name);
-        console.log(err.message);
-        console.log(err.status);
+    this.loadPreferredShops(0);
+  }
+
+  loadPreferredShops(index: number) {
+    this.apiService.getPreferredShops(index).subscribe(
+      result => {
+        this.preferredShops = result.shops;
+        this.totalElements = result.totalElements;
+        this.totalPages = result.totalPages;
+        this.last = result.last;
+        this.size = result.size;
+        this.number = result.number;
+        console.log(result.shops);
+      },
+      error => {
+        console.log(error);
       }
     );
+  }
+
+  onPaginateChange(event){
+    //alert(JSON.stringify("Current page index: " + event.pageIndex));
+    this.loadPreferredShops(event.pageIndex)
   }
 
 }
