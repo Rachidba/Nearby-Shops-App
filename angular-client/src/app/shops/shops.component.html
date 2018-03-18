@@ -12,3 +12,7 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+<mat-paginator [length]="totalElements"
+              [pageSize]="size"
+              (page)="onPaginateChange($event)">
+</mat-paginator>
