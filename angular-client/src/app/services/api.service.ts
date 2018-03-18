@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders, HttpResponseBase } from '@angular/common/http';
 import { Response} from '@angular/http';
 
 import { Shop } from '../models/shop';
@@ -30,6 +30,19 @@ export class ApiService {
     return this.http.get(url, {headers: new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjAiLCJleHAiOjE1MjIxOTYzNzl9.6UMZnwMSCyzBW95Oi7_88wT-3s4CzMsSM6UW168qaRcMHRSn48cOF-ZZIynmC-M-q4jFISPG4ENdBgDHxCJpOg')})
       .map(res => { return { shops: res.content.map(this.toShop), totalElements: res.totalElements, totalPages: res.totalPages, last: res.last, size: res.size, number: res.number } })
       .catch(this.handleError);
+  }
+
+  public likeShop(shop: Shop) {
+    const url = API_URL + '/api/like-shop'
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjAiLCJleHAiOjE1MjIxOTYzNzl9.6UMZnwMSCyzBW95Oi7_88wT-3s4CzMsSM6UW168qaRcMHRSn48cOF-ZZIynmC-M-q4jFISPG4ENdBgDHxCJpOg'
+        })
+    };
+
+    return this.http.post<Shop>(url, shop, httpOptions)
+      .catch(this.handleError);    
   }
 
   /**
