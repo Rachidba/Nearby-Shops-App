@@ -46,8 +46,20 @@ export class ShopsComponent implements OnInit {
   }
 
   onPaginateChange(event){
-    //alert(JSON.stringify("Current page index: " + event.pageIndex));
     this.loadShops(event.pageIndex)
+  }
+
+  likeShop(shop: Shop) {
+    this.apiService.likeShop(shop)
+      .subscribe(
+        error => {
+          console.log(error);
+        }
+      );
+      var index = this.shops.indexOf(shop, 0);
+      if (index > -1) {
+        this.shops.splice(index, 1);
+      }
   }
 
 }
