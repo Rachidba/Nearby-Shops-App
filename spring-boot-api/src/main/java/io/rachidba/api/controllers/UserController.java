@@ -2,6 +2,7 @@ package io.rachidba.api.controllers;
 
 import io.rachidba.api.models.ApplicationUser;
 import io.rachidba.api.models.DislikedShop;
+import io.rachidba.api.models.Shop;
 import io.rachidba.api.repositories.ApplicationUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,27 +35,29 @@ public class UserController {
     }
 
     @PostMapping("/like-shop")
-    public ResponseEntity<String> likeShop(@RequestBody String shopId) {
+    public ResponseEntity<String> likeShop(@RequestBody Shop shop) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        if(!user.getLikedShops().contains(shopId)) {
-            user.getLikedShops().add(shopId);
+        if(!user.getLikedShops().contains(shop.getId())) {
+            user.getLikedShops().add(shop.getId());
             applicationUserRepository.save(user);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @PostMapping("/remove-shop")
-    public ResponseEntity<String> removeShop(@RequestBody String shopId) {
+    public ResponseEntity<String> removeShop(@RequestBody Shop shop) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         ApplicationUser user = applicationUserRepository.findByUsername(username);
-        if(user.getLikedShops().contains(shopId)) {
-            user.getLikedShops().remove(shopId);
+        if(user.getLikedShops().contains(shop.getId())) {
+            user.getLikedShops().remove(shop.getId());
             applicationUserRepository.save(user);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @PostMapping("/dislike-shop")
