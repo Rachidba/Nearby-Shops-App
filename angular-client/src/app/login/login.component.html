@@ -1,20 +1,24 @@
-<form class="login-form">
-  <mat-form-field class="email-full-width">
-    <input matInput placeholder="Email" [formControl]="emailFormControl">
-    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error>
-  </mat-form-field><br><br>
-  <mat-form-field class="email-full-width">
-    <input matInput type="password" placeholder="Password" [formControl]="passwordFormControl">
-    <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
-      Password Length should be at least 6
-    </mat-error>
-    <mat-error *ngIf="passwordFormControl.hasError('required')">
-      Password is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-</form>
+<div *ngIf="authService.isLoggedOut()">
+  <form (ngSubmit)="onLogin()" class="login-form">
+    <mat-form-field class="email-full-width">
+      <input name="username" matInput placeholder="Email" [formControl]="emailFormControl">
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field><br><br>
+    <mat-form-field class="email-full-width">
+      <input name="password" matInput type="password" placeholder="Password" [formControl]="passwordFormControl">
+      <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
+        Password Length should be at least 6
+      </mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" class="marg-top-15">Login</button>
+    <a mat-button routerLink="/register">Register</a>
+  </form>
+</div>
