@@ -52,10 +52,12 @@ export class ShopsComponent implements OnInit {
   likeShop(shop: Shop) {
     this.apiService.likeShop(shop)
       .subscribe(
+        res => {
+          console.log(res)
+        },
         error => {
-          console.log(error);
-        }
-      );
+        console.log(error);
+      });
       var index = this.shops.indexOf(shop, 0);
       if (index > -1) {
         this.shops.splice(index, 1);
