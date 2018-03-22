@@ -1,9 +1,8 @@
-<mat-toolbar color="primary">
+<mat-toolbar *ngIf="authService.isLoggedIn()" color="primary">
     <span>Shops</span>
-  
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
-    
-    <span><a mat-button href="/shops">Nearby Shops</a></span> 
-    <span><a mat-button href="/preferred-shops">My Preferred Shops</a></span>
+    <a mat-button routerLink="/shops">Nearby Shops</a>
+    <a mat-button routerLink="/preferred-shops">My Preferred Shops</a>
+    <a mat-button routerLink="/preferred-shops" (click)="logout()">Logout</a>
   </mat-toolbar>
