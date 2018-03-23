@@ -10,13 +10,10 @@ export class RegistrationService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  register(login) {
+  public register(login): Observable<any> {
     const url = API_URL + '/api/sign-up';
-    this.http.post(url, login, {observe: 'response'})
-            .subscribe(
-              res => this.registered(res),
-              err => console.log('Error')
-            );
+    return this.http.post(url, login, {observe: 'response'})
+      .map(res => res);
   }
 
   registered(response) {
