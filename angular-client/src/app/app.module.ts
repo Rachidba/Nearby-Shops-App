@@ -12,7 +12,14 @@ import { RoutesRoutingModule } from './routes/routes-routing.module';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PreferredShopsComponent } from './preferred-shops/preferred-shops.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiService } from './services/api.service';
+import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './services/auth-interceptor';
+import { HttpModule } from '@angular/http';
+import { AuthGuardService } from './services/auth-guard.service';
+import { LoginGuardService } from './services/login-guard.service';
+import { RegistrationService } from './services/registration.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +39,16 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [
+    ApiService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    AuthGuardService,
+    LoginGuardService,
+    RegistrationService,
   ],
   bootstrap: [AppComponent]
 })
