@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpErrorResponse, HttpResponse, HttpHeaders, HttpResponseBase } from '@angular/common/http';
-import { Response} from '@angular/http';
+//import { Response} from '@angular/http';
 
 import { Shop } from '../models/shop';
 
@@ -19,7 +19,12 @@ export class ApiService {
   // API: GET /api/shops
   public getAllShops(index: number) : Observable<Shop[]>{
     const url = API_URL + '/api/shops?lat=-73.965355&long=40.782865&d=20000&page=' + index + '&size=20';
-    return this.http.get(url, {headers: new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjAiLCJleHAiOjE1MjIxOTYzNzl9.6UMZnwMSCyzBW95Oi7_88wT-3s4CzMsSM6UW168qaRcMHRSn48cOF-ZZIynmC-M-q4jFISPG4ENdBgDHxCJpOg')})
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    return this.http.get(url, httpOptions)
       .map(res => { return { shops: res.content.map(this.toShop), totalElements: res.totalElements, totalPages: res.totalPages, last: res.last, size: res.size, number: res.number } })
       .catch(this.handleError);
   }
@@ -37,12 +42,25 @@ export class ApiService {
     const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjAiLCJleHAiOjE1MjIxOTYzNzl9.6UMZnwMSCyzBW95Oi7_88wT-3s4CzMsSM6UW168qaRcMHRSn48cOF-ZZIynmC-M-q4jFISPG4ENdBgDHxCJpOg'
         })
     };
 
     return this.http.post<Shop>(url, shop, httpOptions)
+      .map( res=> res)
       .catch(this.handleError);    
+  }
+
+  public removeShop(shop: Shop) {
+    const url = API_URL + '/api/remove-shop'
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+        })
+    };
+
+    return this.http.post<Shop>(url, shop, httpOptions)
+      .map( res=> res)
+      .catch(this.handleError);
   }
 
   /**
