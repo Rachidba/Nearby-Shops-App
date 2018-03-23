@@ -37,10 +37,8 @@ export class ShopsComponent implements OnInit {
         this.last = result.last;
         this.size = result.size;
         this.number = result.number;
-        console.log(result.shops);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -53,15 +51,14 @@ export class ShopsComponent implements OnInit {
     this.apiService.likeShop(shop)
       .subscribe(
         res => {
-          console.log(res)
+          var index = this.shops.indexOf(shop, 0);
+          if (index > -1) {
+            this.shops.splice(index, 1);
+          }
         },
         error => {
-        console.log(error);
       });
-      var index = this.shops.indexOf(shop, 0);
-      if (index > -1) {
-        this.shops.splice(index, 1);
-      }
+     
   }
 
 }
