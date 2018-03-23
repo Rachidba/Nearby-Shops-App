@@ -1,4 +1,6 @@
-<form class="register-form">
+<form class="register-form" (ngSubmit)="onRegister()">
+  <mat-card *ngIf="success" style="margin-bottom:20px;">Your account was created, Please login to your account</mat-card>
+  <mat-card *ngIf="error" style="background-color:#FFC107;margin-bottom:20px;">You've already created an account with this email address !</mat-card>
   <mat-form-field class="email-full-width">
     <input matInput placeholder="Email" [formControl]="emailFormControl">
     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -19,15 +21,6 @@
       Password is <strong>required</strong>
     </mat-error>
   </mat-form-field>
-  <br>
-  <br>
-  <mat-form-field class="email-full-width">
-    <input matInput type="password" placeholder="Password" [formControl]="passwordFormControl">
-    <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
-      Password Length should be at least 6
-    </mat-error>
-    <mat-error *ngIf="passwordFormControl.hasError('required')">
-      Password is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit" class="marg-top-15">Register</button>
+  <a mat-button routerLink="/login">Login</a>
 </form>
