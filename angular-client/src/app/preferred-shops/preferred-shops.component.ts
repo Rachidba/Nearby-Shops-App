@@ -37,16 +37,26 @@ export class PreferredShopsComponent implements OnInit {
         this.last = result.last;
         this.size = result.size;
         this.number = result.number;
-        console.log(result.shops);
       },
       error => {
-        console.log(error);
       }
     );
   }
 
-  onPaginateChange(event){
-    //alert(JSON.stringify("Current page index: " + event.pageIndex));
+  onRemove(shop: Shop) {
+    this.apiService.removeShop(shop)
+      .subscribe(
+        res => {
+          var index = this.preferredShops.indexOf(shop, 0);
+          if (index > -1) {
+            this.preferredShops.splice(index, 1);
+          }
+        },
+        error => {
+      });
+  }
+
+  onPaginateChange(event) {
     this.loadPreferredShops(event.pageIndex)
   }
 
