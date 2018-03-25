@@ -9,7 +9,7 @@ import { Login } from '../models/login';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent{
-
+  error: boolean = false;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
@@ -29,7 +29,14 @@ export class LoginComponent{
     if(this.emailFormControl.valid && this.emailFormControl.valid)
     {
       var login = new Login(this.emailFormControl.value, this.passwordFormControl.value);
-      this.authService.login(login);
+      this.authService.login(login).subscribe(
+        result => {
+          this.error = false;
+        },
+        error => {
+          this.error = true;
+        }
+      );
     }
   }
 }

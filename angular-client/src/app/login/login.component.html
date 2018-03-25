@@ -1,6 +1,7 @@
-<div *ngIf="authService.isLoggedOut()">
+<div>
   <form (ngSubmit)="onLogin()" class="login-form">
-    <mat-form-field class="email-full-width">
+      <mat-card *ngIf="error" style="background-color:#FFC107;margin-bottom:20px;">Pour email or password is incorrect. Please try again</mat-card>
+      <mat-form-field class="email-full-width">
       <input name="username" matInput placeholder="Email" [formControl]="emailFormControl">
       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
         Please enter a valid email address
