@@ -57,8 +57,12 @@ I workerd with IntelliJ IDEA 2017.3.5 (Community Edition).
 
 Open Projetc with IntelliJ IDEA
 
-Import maven dependencies:
+Next Import maven dependencies:
+
+```
 Project > [your project name] > right click > Maven > Reimport
+```
+Once this is set up, execute the Application.
 
 ### Angular Client
 
