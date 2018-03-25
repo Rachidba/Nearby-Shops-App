@@ -7,7 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatFormFieldModule } from '@angular/material';
+
 
 @NgModule({
   imports: [
@@ -20,7 +20,6 @@ import {MatFormFieldModule } from '@angular/material';
     MatButtonModule,
     MatGridListModule,
     MatPaginatorModule,
-    MatFormFieldModule,
   ],
   exports: [
     MatToolbarModule,
@@ -31,7 +30,6 @@ import {MatFormFieldModule } from '@angular/material';
     MatButtonModule,
     MatGridListModule,
     MatPaginatorModule,
-    MatFormFieldModule,
   ],
   declarations: []
 })
