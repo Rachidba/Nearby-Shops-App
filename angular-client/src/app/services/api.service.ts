@@ -25,7 +25,7 @@ export class ApiService {
       })
     };
     return this.http.get(url, httpOptions)
-      .map(res => { return { shops: res.content.map(this.toShop), totalElements: res.totalElements, totalPages: res.totalPages, last: res.last, size: res.size, number: res.number } })
+      .map(res => { return { shops: res['content'].map(this.toShop), totalElements: res['totalElements'], totalPages: res['totalPages'], last: res['last'], size: res['size'], number: res['number'] } })
       .catch(this.handleError);
   }
 
@@ -33,7 +33,7 @@ export class ApiService {
   public getPreferredShops(index: number) : Observable<Shop[]>{
     const url = API_URL + '/api/shops/liked?lat=-73.965355&long=40.782865&d=20000&page=' + index + '&size=20';
     return this.http.get(url, {headers: new HttpHeaders().set('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjAiLCJleHAiOjE1MjIxOTYzNzl9.6UMZnwMSCyzBW95Oi7_88wT-3s4CzMsSM6UW168qaRcMHRSn48cOF-ZZIynmC-M-q4jFISPG4ENdBgDHxCJpOg')})
-      .map(res => { return { shops: res.content.map(this.toShop), totalElements: res.totalElements, totalPages: res.totalPages, last: res.last, size: res.size, number: res.number } })
+      .map(res => { return { shops: res['content'].map(this.toShop), totalElements: res['totalElements'], totalPages: res['totalPages'], last: res['last'], size: res['size'], number: res['number'] } })
       .catch(this.handleError);
   }
 
@@ -85,7 +85,7 @@ export class ApiService {
 
     if (err instanceof Response) {
       const body   = err.json() || '';
-      const error  = body.error || JSON.stringify(body);
+      const error  = body['error'] || JSON.stringify(body);
       errMessage = `${err.status} - ${err.statusText || ''} ${error}`;
     } else {
       errMessage = err.message ? err.message : err.toString();
