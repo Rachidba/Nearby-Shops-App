@@ -31,12 +31,12 @@ export class ShopsComponent implements OnInit {
   loadShops(index: number) {
     this.apiService.getAllShops(index).subscribe(
       result => {
-        this.shops = result.shops;
-        this.totalElements = result.totalElements;
-        this.totalPages = result.totalPages;
-        this.last = result.last;
-        this.size = result.size;
-        this.number = result.number;
+        this.shops = result['shops'];
+        this.totalElements = result['totalElements'];
+        this.totalPages = result['totalPages'];
+        this.last = result['last'];
+        this.size = result['size'];
+        this.number = result['number'];
       },
       error => {
       }
