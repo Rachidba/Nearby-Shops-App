@@ -51,8 +51,14 @@ git clone https://github.com/Rachidba/Nearby-Shops-App.git
 ```
 
 ### Spring Boot API
-You can deploy Spring Boot API with Maven Or with an
-I workerd with IntelliJ IDEA 2017.3.5 (Community Edition) 
+You can deploy Spring Boot API with Maven Or with an IDE.
+
+I workerd with IntelliJ IDEA 2017.3.5 (Community Edition).
+
+Open Projetc with IntelliJ IDEA
+
+Import maven dependencies:
+Project > [your project name] > right click > Maven > Reimport
 
 ### Angular Client
 
