@@ -69,7 +69,8 @@ public class UserController {
         if(!user.getDislikedShops().contains(ds)) {
             user.getDislikedShops().add(ds);
             applicationUserRepository.save(user);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 }
