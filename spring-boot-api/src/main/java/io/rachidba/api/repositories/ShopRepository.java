@@ -15,4 +15,3 @@ public interface ShopRepository extends MongoRepository<Shop, String> {
     Page<Shop> findByLocationNearAndIdNotIn(Point location, Distance distance, List<String> ids, Pageable pageable);
     Page<Shop> findByLocationNearAndIdIn(Point location, Distance distance, List<String> ids, Pageable pageable);
 }
-
