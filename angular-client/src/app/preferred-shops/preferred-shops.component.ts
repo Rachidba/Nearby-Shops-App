@@ -31,12 +31,12 @@ export class PreferredShopsComponent implements OnInit {
   loadPreferredShops(index: number) {
     this.apiService.getPreferredShops(index).subscribe(
       result => {
-        this.preferredShops = result.shops;
-        this.totalElements = result.totalElements;
-        this.totalPages = result.totalPages;
-        this.last = result.last;
-        this.size = result.size;
-        this.number = result.number;
+        this.preferredShops = result['shops'];
+        this.totalElements = result['totalElements'];
+        this.totalPages = result['totalPages'];
+        this.last = result['last'];
+        this.size = result['size'];
+        this.number = result['number'];
       },
       error => {
       }
