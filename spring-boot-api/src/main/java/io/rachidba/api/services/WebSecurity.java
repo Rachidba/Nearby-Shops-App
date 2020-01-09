@@ -1,5 +1,6 @@
 package io.rachidba.api.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,11 +23,11 @@ import static io.rachidba.api.services.SecurityConstants.SIGN_UP_URL;
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public WebSecurity(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public WebSecurity(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     // configure(HttpSecurity http): a method where we can define

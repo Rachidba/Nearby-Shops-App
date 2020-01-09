@@ -4,6 +4,7 @@ import io.rachidba.api.models.ApplicationUser;
 import io.rachidba.api.models.DislikedShop;
 import io.rachidba.api.models.Shop;
 import io.rachidba.api.repositories.ApplicationUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -19,14 +20,10 @@ import java.sql.Timestamp;
 // The endpoint that enables new users to register
 public class UserController {
 
+    @Autowired
     private ApplicationUserRepository applicationUserRepository;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public UserController(ApplicationUserRepository applicationUserRepository,
-                          BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.applicationUserRepository = applicationUserRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
     @PostMapping("/sign-up")
     public void signUp(@RequestBody ApplicationUser user) {
