@@ -1,7 +1,6 @@
 package io.rachidba.api.models;
 
 public class DislikedShop implements Comparable<DislikedShop> {
-    // The Date that user disliked the shop: Timestamp
     private long dislikeDate;
     private String shopId;
 

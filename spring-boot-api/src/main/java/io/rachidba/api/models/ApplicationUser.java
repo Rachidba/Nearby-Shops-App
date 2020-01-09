@@ -11,13 +11,10 @@ import java.util.List;
 public class ApplicationUser {
     @Id
     private String id;
-    //user email
     @Indexed(unique = true)
     private String username;
     private String password;
-    // Liked shops: List that contains the IDs of liked shops
     private List<String> likedShops = new ArrayList<>();
-    // Disliked shops
     private List<DislikedShop> dislikedShops = new ArrayList<>();
 
     public ApplicationUser() {
