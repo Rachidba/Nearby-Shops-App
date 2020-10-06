@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { Shop } from '../models/shop';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-shops',
@@ -20,8 +19,7 @@ export class ShopsComponent implements OnInit {
   number: 0;
   size: 20;
 
-  constructor(private apiService: ApiService) { 
-
+  constructor(private apiService: ApiService) {
   }
 
   ngOnInit() {
@@ -44,21 +42,19 @@ export class ShopsComponent implements OnInit {
   }
 
   onPaginateChange(event){
-    this.loadShops(event.pageIndex)
+    this.loadShops(event.pageIndex);
   }
 
   likeShop(shop: Shop) {
     this.apiService.likeShop(shop)
       .subscribe(
         res => {
-          var index = this.shops.indexOf(shop, 0);
+          const index = this.shops.indexOf(shop, 0);
           if (index > -1) {
             this.shops.splice(index, 1);
           }
         },
         error => {
       });
-     
   }
-
 }

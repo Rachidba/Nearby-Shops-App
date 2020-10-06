@@ -1,4 +1,4 @@
-import { Geolocation } from "./location";
+import { Geolocation } from './location';
 
 export class Shop {
     id: string;
@@ -7,4 +7,4 @@ export class Shop {
     email?: string;
     city?: string;
     location?: Geolocation;
-  }
+}

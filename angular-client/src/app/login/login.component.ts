@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service'
+import { AuthService } from '../services/auth.service';
 import { Login } from '../models/login';
 
 @Component({
@@ -9,11 +9,8 @@ import { Login } from '../models/login';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent{
-  error: boolean = false;
+  error = false;
   constructor(private authService: AuthService) { }
-
-  ngOnInit() {
-  }
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -26,9 +23,8 @@ export class LoginComponent{
   ]);
 
   onLogin() {
-    if(this.emailFormControl.valid && this.emailFormControl.valid)
-    {
-      var login = new Login(this.emailFormControl.value, this.passwordFormControl.value);
+    if (this.emailFormControl.valid && this.emailFormControl.valid) {
+      const login = new Login(this.emailFormControl.value, this.passwordFormControl.value);
       this.authService.login(login).subscribe(
         result => {
           this.error = false;

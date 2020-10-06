@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Login } from '../models/login';
 import { RegistrationService } from '../services/registration.service';
 
@@ -9,25 +9,28 @@ import { RegistrationService } from '../services/registration.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  success: boolean = false;
-  error: boolean = false;
-  constructor(private registerationService: RegistrationService) { }
+  success = false;
+  error = false;
+  emailFormControl: FormControl;
+  passwordFormControl: FormControl;
+  constructor(private registerationService: RegistrationService) {
+    this.emailFormControl = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    this.passwordFormControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]);
+  }
 
   ngOnInit() {
   }
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-  ]);
 
   onRegister() {
     if (this.emailFormControl.valid && this.passwordFormControl.valid) {
-      var login = new Login(this.emailFormControl.value, this.passwordFormControl.value);
-      var response = this.registerationService.register(login).subscribe(
+      const login = new Login(this.emailFormControl.value, this.passwordFormControl.value);
+      const response = this.registerationService.register(login).subscribe(
         result => {
           this.success = true;
           this.error = false;

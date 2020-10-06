@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Shop } from '../models/shop';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -20,8 +19,7 @@ export class PreferredShopsComponent implements OnInit {
   number: 0;
   size: 20;
 
-  constructor(private apiService: ApiService) { 
-
+  constructor(private apiService: ApiService) {
   }
 
   ngOnInit() {
@@ -47,7 +45,7 @@ export class PreferredShopsComponent implements OnInit {
     this.apiService.removeShop(shop)
       .subscribe(
         res => {
-          var index = this.preferredShops.indexOf(shop, 0);
+          const index = this.preferredShops.indexOf(shop, 0);
           if (index > -1) {
             this.preferredShops.splice(index, 1);
           }
